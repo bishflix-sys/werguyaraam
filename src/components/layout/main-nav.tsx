@@ -1,3 +1,4 @@
+
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -65,9 +66,8 @@ export function MainNav() {
   const renderNavItems = (items: typeof mainNavItems) =>
     items.map(({ href, icon: Icon, label }) => (
       <SidebarMenuItem key={href}>
-        <Link href={href}>
+        <Link href={href} passHref>
           <SidebarMenuButton
-            asChild
             isActive={pathname === href}
             tooltip={{ children: label, side: 'right', align: 'center' }}
           >
@@ -96,7 +96,7 @@ export function MainNav() {
           <SidebarSeparator className="my-2"/>
           {renderNavItems(clinicalToolsItems)}
           <SidebarSeparator className="my-2"/>
-          {renderNavItems(managementItems)}
+          {renderNavİtems(managementItems)}
            <SidebarSeparator className="my-2"/>
           {renderNavItems(adminItems)}
         </SidebarMenu>
@@ -104,9 +104,8 @@ export function MainNav() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link href="/settings">
+            <Link href="/settings" passHref>
               <SidebarMenuButton
-                asChild
                 isActive={pathname === '/settings'}
                 tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
               >
@@ -118,9 +117,8 @@ export function MainNav() {
             </Link>
           </SidebarMenuItem>
           <SidebarMenuItem>
-             <Link href="/login">
+             <Link href="/login" passHref>
               <SidebarMenuButton
-                asChild
                 tooltip={{ children: 'Déconnexion', side: 'right', align: 'center' }}
               >
                 <div>
