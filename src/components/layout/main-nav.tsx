@@ -65,13 +65,16 @@ export function MainNav() {
   const renderNavItems = (items: typeof mainNavItems) =>
     items.map(({ href, icon: Icon, label }) => (
       <SidebarMenuItem key={href}>
-        <Link href={href} legacyBehavior passHref>
+        <Link href={href}>
           <SidebarMenuButton
+            asChild
             isActive={pathname === href}
             tooltip={{ children: label, side: 'right', align: 'center' }}
           >
-            <Icon />
-            <span>{label}</span>
+            <div>
+              <Icon />
+              <span>{label}</span>
+            </div>
           </SidebarMenuButton>
         </Link>
       </SidebarMenuItem>
@@ -101,23 +104,29 @@ export function MainNav() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link href="/settings" legacyBehavior passHref>
+            <Link href="/settings">
               <SidebarMenuButton
+                asChild
                 isActive={pathname === '/settings'}
                 tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
               >
-                <Settings />
-                <span>Paramètres</span>
+                <div>
+                  <Settings />
+                  <span>Paramètres</span>
+                </div>
               </SidebarMenuButton>
             </Link>
           </SidebarMenuItem>
           <SidebarMenuItem>
-             <Link href="/login" legacyBehavior passHref>
+             <Link href="/login">
               <SidebarMenuButton
+                asChild
                 tooltip={{ children: 'Déconnexion', side: 'right', align: 'center' }}
               >
-                <LogOut />
-                <span>Déconnexion</span>
+                <div>
+                  <LogOut />
+                  <span>Déconnexion</span>
+                </div>
               </SidebarMenuButton>
             </Link>
           </SidebarMenuItem>
