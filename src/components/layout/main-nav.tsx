@@ -96,7 +96,7 @@ export function MainNav() {
           <SidebarSeparator className="my-2"/>
           {renderNavItems(clinicalToolsItems)}
           <SidebarSeparator className="my-2"/>
-          {renderNavİtems(managementItems)}
+          {renderNavItems(managementItems)}
            <SidebarSeparator className="my-2"/>
           {renderNavItems(adminItems)}
         </SidebarMenu>
