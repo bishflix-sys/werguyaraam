@@ -1,0 +1,74 @@
+# **App Name**: Weerguyaram Santé
+
+## Core Features:
+
+- Dossier Patient Centralisé: Gestion complète des informations des patients : antécédents, allergies, traitements, etc.
+- Planification des Rendez-Vous: Outil de planification pour les rendez-vous médicaux, intégrant la disponibilité des praticiens et les préférences des patients.
+- Gestion des Stocks de Médicaments: Suivi en temps réel des niveaux de stock de médicaments, alertes pour les réapprovisionnements, gestion des lots et dates d'expiration.
+- Facturation et Suivi des Paiements: Génération automatique des factures, gestion des paiements (assurances, patients), rapports financiers.
+- Analyse Prédictive des Tendances de Santé: Un outil d'IA pour analyser les données des patients afin d'identifier les tendances de santé émergentes et d'anticiper les besoins en ressources. The AI will be used as a tool and use reasoning.
+- Communication Sécurisée: Module de messagerie sécurisée pour faciliter la communication entre les professionnels de santé et les patients, conforme aux normes de confidentialité.
+- Gestion du Personnel: Gestion des informations des employés, des horaires, des absences et des congés.
+- File d'attente des patients: Gestion de l'ordre de passage des patients en salle d'attente.
+- GED pour fichiers sensibles: Gestion électronique des documents sensibles des patients.
+- Page de connexion: Page de connexion au début de chaque connexion pour la sécurité
+- Patient Portal: Accès patient autonome : consultation dossier, RDV, résultats, factures, consentements.
+- Suivi des résultats de labo / imagerie: Import DICOM, LOINC, normal ranges, historique graphique.
+- E-prescription & vérification d’interactions médicamenteuses: Checks automatiques allergies/contre-indications.
+- Prise de notes cliniques structurées + templates: SOAP, templates consult/urgences, champs codés.
+- Plan de soins / parcours patient: Pathways, rappels automatiques, alertes de suivi chronique.
+- Triage / scoring clinique: Priorisation en urgences, redirections.
+- Gestion des références / transferts: Lettres de sortie, suivi des références externes.
+- Gestion des consentements patients: Consentement éclairé, journalisation, révocation.
+- Chiffrement TLS + AES-256 et gestion des clés: Chiffrement TLS (in-transit) + AES-256 (at-rest) et gestion des clés (HSM/rotation).
+- Contrôle d’accès fin / RBAC: Rôles, scopes, séparation des privilèges.
+- Authentification forte: SSO / OpenID Connect, MFA, session policies.
+- Journal d’audit immuable: Actions sensibles : qui a vu/édité/supprimé quoi.
+- Politique de rétention & suppression des données: Anonymisation/pseudonymisation pour la recherche.
+- Tests de pénétration & scans vulnérabilités réguliers: Processus de corrections.
+- Conformité réglementaire: Exigences locales + mention GDPR/HIPAA selon marché cible et accords de traitement des données (DPA).
+- Support FHIR + HL7 v2/v3, DICOM: Support FHIR (R4) + HL7 v2/v3, DICOM pour imagerie, CDS Hooks pour intégration décisionnelle.
+- Terminologies médicales: SNOMED CT, ICD-10, LOINC (mapping des champs cliniques).
+- API docs, webhooks: API docs (OpenAPI/Swagger), webhooks pour notifications externes.
+- Connecteurs: laboratoires, pharmacies, assurances (format de facturation/claims).
+- Intégration avec identité nationale: ex. ID numérique / Senpass si pertinent.
+- Choix BD & schéma: relationnel pour EHR + time-series pour vitaux/logs.
+- CI/CD, containerisation, IaC: CI/CD, containerisation (Docker/K8s), IaC (Terraform).
+- Monitoring & observabilité: metrics, logs, tracing ; Prometheus/Grafana/Sentry.
+- Plan sauvegarde / DR: RPO/RTO définis et tests de restauration.
+- Scalabilité & multi-tenant: si multi-cliniques.
+- Offline / sync: pour zones à connectivité faible (mobile).
+- Consentement explicite pour l’usage des données patient: dans les modèles.
+- MLOps / versioning des modèles: tests, validation clinique avant production.
+- Explainability & logs d’actions IA: comment l’IA a généré une alerte / suggestion.
+- Human-in-the-loop: recommandations soumises à validation clinique.
+- Processus de surveillance du drift et mesures de biais: Processus de surveillance du drift et mesures de biais.
+- Palette de couleurs accessible: contraste WCAG AA/AAA, variantes pour daltoniens, dark mode.
+- Système de design complet: tokens (couleurs, spacing, typographie, composants).
+- Spécifications typographiques complètes: tailles, poids, fallback, licence webfont.
+- Accessibilité: WCAG 2.1 : navigation clavier, lecteurs d’écran, labels clairs.
+- Parcours utilisateurs & personas: médecin, infirmier, pharmacien, admin, patient.
+- Wireframes & prototypes interactifs: pages clés : consultation, ordonnances, inventaire.
+- Catalogues de tarifs: codes, TVA/taxes locales, mutuelles.
+- Gestion des réclamations assurance: format export, suivi statuts.
+- Réconciliation paiements / rapports comptables, intégration PSP: Réconciliation paiements / rapports comptables, intégration PSP.
+- Historique et justificatifs imprimables: Historique et justificatifs imprimables.
+- Stratégie tests: unit, intégration, E2E, tests de charge, tests sécurité.
+- UAT clinique avec médico-techs: validation des flows cliniques avant prod.
+- SLA / niveaux d’assistance, runbook incident: SLA / niveaux d’assistance, runbook incident, contact support & escalade.
+- Formation & documentation: manuels, vidéos, FAQ, onboarding pour les personnels.
+- Roadmap & MVP définis: features prioritaires, critères d’acceptation.
+- KPIs pour mesurer le succès: temps moyen de RDV, taux d’occupation, erreurs médicamenteuses évitées, NPS.
+- Modèle de monétisation: licence, abonnement par utilisateur, par établissement.
+
+## Style Guidelines:
+
+- Primary color: Dark green (#00853F), inspired by the first color of the Senegal flag, symbolizing hope, progress, and growth.
+- Secondary color: Yellow (#FFDA63), drawing from the second color of the Senegal flag, representing wealth, prosperity, and energy.
+- Accent color: Red (#DA291C), inspired by the third color of the Senegal flag, symbolizing sacrifice, determination, and strength.
+- Background color: Light beige (#F5F5DC), offering a clean and neutral backdrop to ensure readability and focus.
+- Body font: 'Roboto', a modern sans-serif font for readability and a clean user experience.
+- Headline font: 'Montserrat', a bold sans-serif font for clear and impactful headings.
+- Use clear, professional icons with a consistent style, related to healthcare and management.
+- A clean and well-structured layout to facilitate ease of use and navigation for healthcare professionals.
+- Subtle and functional animations to guide users and provide feedback without being distracting.
