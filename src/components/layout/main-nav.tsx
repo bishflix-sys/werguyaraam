@@ -1,3 +1,4 @@
+
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -28,14 +29,28 @@ import {
   Globe,
   ArrowRightLeft,
   Ambulance,
+  ClipboardList,
+  Stethoscope,
+  FileSignature,
+  FlaskConical,
+  BookUser,
+  HeartPulse
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
 const clinicalNavItems = [
   { href: '/patients', icon: FolderKanban, label: 'Dossiers Patients (DME)' },
   { href: '/appointments', icon: CalendarDays, label: 'Rendez-vous' },
-  { href: '/staff', icon: UsersRound, label: 'Professionnels' },
+  { href: '/queue', icon: Users, label: "File d'attente" },
+  { href: '/triage', icon: HeartPulse, label: "Triage / Scoring" },
+  { href: '/notes', icon: ClipboardList, label: 'Notes Cliniques' },
+  { href: '/prescriptions', icon: FileSignature, label: 'E-Prescription' },
+  { href: '/results', icon: FlaskConical, label: 'Résultats Labo' },
+  { href: '/care-plans', icon: Stethoscope, label: 'Plans de Soins' },
+  { href: '/consent', icon: BookUser, label: 'Consentements' },
   { href: '/referrals', icon: ArrowRightLeft, label: 'Références & Transferts' },
+  { href: '/staff', icon: UsersRound, label: 'Professionnels' },
+  { href: '/messaging', icon: MessageCircle, label: 'Communication' },
 ];
 
 const financialItems = [
