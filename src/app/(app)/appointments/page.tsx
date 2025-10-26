@@ -45,7 +45,7 @@ export default function AppointmentsPage() {
       <div className="md:col-span-1">
         <Card>
            <CardHeader>
-            <CardTitle className="font-headline">Calendrier</CardTitle>
+            <CardTitle className="font-headline">Calendrier des médecins</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <Calendar
@@ -65,7 +65,7 @@ export default function AppointmentsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle className="font-headline">Rendez-vous</CardTitle>
+              <CardTitle className="font-headline">Prise de rendez-vous</CardTitle>
               <CardDescription>
                 Liste des rendez-vous pour le {date ? date.toLocaleDateString('fr-FR') : ''}
               </CardDescription>

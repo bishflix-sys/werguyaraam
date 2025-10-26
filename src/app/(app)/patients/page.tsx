@@ -28,7 +28,7 @@ export default function PatientsPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle className="font-headline">Dossiers Patients</CardTitle>
+          <CardTitle className="font-headline">Dossiers Médicaux Électroniques (DME)</CardTitle>
           <CardDescription>
             Gérez les informations et les antécédents de vos patients.
           </CardDescription>

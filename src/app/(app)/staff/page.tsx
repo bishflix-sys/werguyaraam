@@ -34,9 +34,9 @@ export default function StaffPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle className="font-headline">Gestion du Personnel</CardTitle>
+          <CardTitle className="font-headline">Gestion des Professionnels</CardTitle>
           <CardDescription>
-            Gérez les informations des employés, les horaires, et les congés.
+            Gérez les plannings, spécialités, et compétences du personnel.
           </CardDescription>
         </div>
         <Button>
@@ -49,7 +49,7 @@ export default function StaffPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Nom</TableHead>
-              <TableHead>Rôle</TableHead>
+              <TableHead>Rôle / Spécialité</TableHead>
               <TableHead>Statut</TableHead>
               <TableHead className="text-right">Actions</TableHead>
             </TableRow>

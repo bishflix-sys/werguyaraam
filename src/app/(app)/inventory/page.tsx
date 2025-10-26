@@ -47,9 +47,9 @@ export default function InventoryPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-            <CardTitle className="font-headline">Gestion des Stocks de Médicaments</CardTitle>
+            <CardTitle className="font-headline">Gestion des Stocks & Pharmacie</CardTitle>
             <CardDescription>
-              Suivez en temps réel les niveaux de stock, lots et dates d'expiration.
+              Suivez l'inventaire, la traçabilité des médicaments et les alertes de péremption.
             </CardDescription>
         </div>
         <div className="flex gap-2">

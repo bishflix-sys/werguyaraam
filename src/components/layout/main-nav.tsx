@@ -19,60 +19,48 @@ import {
   Pill,
   CreditCard,
   UsersRound,
-  Clock,
   MessageCircle,
   Settings,
   LogOut,
-  Beaker,
-  ClipboardPenLine,
-  FileText,
-  HeartPulse,
-  TriangleAlert,
-  ArrowRightLeft,
-  FileCheck,
-  Building,
-  TrendingUp,
+  FolderKanban,
+  Wrench,
+  AreaChart,
+  KeyRound,
+  Globe,
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
-const mainNavItems = [
-  { href: '/dashboard', icon: LayoutDashboard, label: 'Tableau de Bord' },
-  { href: '/queue', icon: Clock, label: "File d'attente" },
+const clinicalNavItems = [
+  { href: '/patients', icon: FolderKanban, label: 'Dossiers Patients (DME)' },
   { href: '/appointments', icon: CalendarDays, label: 'Rendez-vous' },
-  { href: '/patients', icon: Users, label: 'Dossiers Patients' },
+  { href: '/staff', icon: UsersRound, label: 'Professionnels' },
 ];
 
-const clinicalToolsItems = [
-  { href: '/notes', icon: FileText, label: 'Notes Cliniques' },
-  { href: '/prescriptions', icon: ClipboardPenLine, label: 'E-Prescription' },
-  { href: '/results', icon: Beaker, label: 'Résultats Labo' },
-  { href: '/care-plans', icon: HeartPulse, label: 'Plans de Soins' },
-  { href: '/triage', icon: TriangleAlert, label: 'Triage' },
+const financialItems = [
+  { href: '/billing', icon: CreditCard, label: 'Facturation & Paiements' },
+  { href: '/analytics', icon: AreaChart, label: 'Rapports & Stats' },
 ];
 
-const managementItems = [
-  { href: '/inventory', icon: Pill, label: 'Médicaments' },
-  { href: '/billing', icon: CreditCard, label: 'Facturation' },
-  { href: '/staff', icon: UsersRound, label: 'Personnel' },
-  { href: '/messaging', icon: MessageCircle, label: 'Messagerie' },
+const logisticsItems = [
+  { href: '/inventory', icon: Pill, label: 'Pharmacie & Stocks' },
+  { href: '/equipment', icon: Wrench, label: 'Maintenance Équipements' },
 ];
 
-const adminItems = [
-  { href: '/analytics', icon: TrendingUp, label: 'Analyses' },
-  { href: '/referrals', icon: ArrowRightLeft, label: 'Références' },
-  { href: '/consent', icon: FileCheck, label: 'Consentements' },
-  { href: '/hospitals', icon: Building, label: 'Annuaire' },
+const platformItems = [
+  { href: '/settings', icon: Settings, label: 'Paramètres' },
+  { href: '/hospitals', icon: Globe, label: 'Portail Patient' },
+  { href: '/login', icon: KeyRound, label: 'Sécurité & Permissions' },
 ];
 
 export function MainNav() {
   const pathname = usePathname();
 
-  const renderNavItems = (items: typeof mainNavItems) =>
+  const renderNavItems = (items: typeof clinicalNavItems) =>
     items.map(({ href, icon: Icon, label }) => (
       <SidebarMenuItem key={href}>
         <SidebarMenuButton
           asChild
-          isActive={pathname === href}
+          isActive={pathname.startsWith(href)}
           tooltip={{ children: label, side: 'right', align: 'center' }}
         >
           <Link href={href}>
@@ -98,33 +86,38 @@ export function MainNav() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
-          <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Principal</span>
-          {renderNavItems(mainNavItems)}
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/dashboard'}
+              tooltip={{ children: 'Tableau de Bord', side: 'right', align: 'center' }}
+            >
+              <Link href="/dashboard">
+                  <LayoutDashboard className="shrink-0 group-data-[collapsible=icon]:h-6 group-data-[collapsible=icon]:w-6" />
+                  <span className="group-data-[collapsible=icon]:hidden">Tableau de Bord</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          
           <SidebarSeparator className="my-2"/>
-           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Outils Cliniques</span>
-          {renderNavItems(clinicalToolsItems)}
+          <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Clinique</span>
+          {renderNavItems(clinicalNavItems)}
+
           <SidebarSeparator className="my-2"/>
-           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Gestion</span>
-          {renderNavItems(managementItems)}
+           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Finances</span>
+          {renderNavItems(financialItems)}
+
            <SidebarSeparator className="my-2"/>
-           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Administration</span>
-          {renderNavItems(adminItems)}
+           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Logistique</span>
+          {renderNavItems(logisticsItems)}
+          
+          <SidebarSeparator className="my-2"/>
+           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Plateforme</span>
+          {renderNavItems(platformItems)}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              isActive={pathname === '/settings'}
-              tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
-            >
-              <Link href="/settings">
-                <Settings className="shrink-0 group-data-[collapsible=icon]:h-6 group-data-[collapsible=icon]:w-6" />
-                <span className="group-data-[collapsible=icon]:hidden">Paramètres</span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem>
              <SidebarMenuButton
                 asChild

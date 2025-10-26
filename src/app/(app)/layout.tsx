@@ -22,44 +22,37 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   };
 
   const getPageTitle = (path: string) => {
-    const segment = path.split('/').pop() || 'dashboard';
-    switch (segment) {
-      case 'dashboard':
-        return 'Tableau de Bord';
-      case 'patients':
-        return 'Dossiers Patients';
-      case 'appointments':
-        return 'Rendez-vous';
-      case 'inventory':
-        return 'Gestion des Médicaments';
-      case 'billing':
-        return 'Facturation';
-      case 'staff':
-        return 'Gestion du Personnel';
-      case 'queue':
+    if (path.startsWith('/patients')) return 'Dossiers Médicaux Électroniques (DME)';
+    if (path.startsWith('/appointments')) return 'Gestion des Rendez-vous';
+    if (path.startsWith('/staff')) return 'Gestion des Professionnels';
+    if (path.startsWith('/billing')) return 'Facturation & Paiements';
+    if (path.startsWith('/analytics')) return 'Rapports & Statistiques';
+    if (path.startsWith('/inventory')) return 'Gestion des Stocks & Pharmacie';
+    if (path.startsWith('/equipment')) return 'Maintenance des Équipements';
+    if (path.startsWith('/hospitals')) return 'Portail Patient';
+    if (path.startsWith('/settings')) return 'Paramètres';
+    if (path.startsWith('/dashboard')) return 'Tableau de Bord';
+    
+    // Fallback titles for other pages from the previous structure
+    switch (path) {
+      case '/queue':
         return "File d'attente";
-      case 'messaging':
+      case '/messaging':
         return 'Communication Sécurisée';
-      case 'settings':
-        return 'Paramètres';
-       case 'notes':
+      case '/notes':
         return 'Notes Cliniques';
-      case 'prescriptions':
+      case '/prescriptions':
         return 'E-Prescription';
-      case 'results':
+      case '/results':
         return 'Résultats Labo';
-      case 'care-plans':
+      case '/care-plans':
         return 'Plans de Soins';
-      case 'referrals':
+      case '/referrals':
         return 'Références';
-      case 'consent':
+      case '/consent':
         return 'Consentements';
-      case 'triage':
+      case '/triage':
         return 'Triage';
-      case 'hospitals':
-        return 'Hôpitaux et Cliniques';
-      case 'analytics':
-        return 'Analyses et Rapports';
       default:
         return 'weerguyaram';
     }

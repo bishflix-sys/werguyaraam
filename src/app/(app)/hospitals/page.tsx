@@ -88,15 +88,15 @@ export default function HospitalsPage() {
     <>
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline">Annuaire Weergu Yaram</CardTitle>
+        <CardTitle className="font-headline">Portail Patient</CardTitle>
         <CardDescription>
-          Annuaire des établissements de santé au Sénégal.
+          Accédez à vos résultats, prenez rendez-vous et communiquez de manière sécurisée.
         </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="mb-4">
             <Input 
-              placeholder="Rechercher un établissement, une ville ou une catégorie..." 
+              placeholder="Rechercher un établissement pour prendre un RDV..." 
               className="w-full md:w-1/2"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}

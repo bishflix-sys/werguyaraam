@@ -3,7 +3,7 @@
 
 import { Bar, BarChart, CartesianGrid, Legend, Line, LineChart, Pie, PieChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, DollarSign, Activity, Calendar, TrendingUp } from 'lucide-react';
+import { Users, DollarSign, Activity, Calendar } from 'lucide-react';
 
 const monthlyRevenue = [
   { name: 'Jan', revenue: 4000 },
@@ -35,9 +35,9 @@ export default function AnalyticsPage() {
     <div className="space-y-6">
        <Card>
         <CardHeader>
-          <CardTitle className="font-headline">Analyses et Rapports</CardTitle>
+          <CardTitle className="font-headline">Rapports & Statistiques</CardTitle>
           <CardDescription>
-            Vue d'ensemble des performances de la clinique.
+            Tableaux de bord, indicateurs de performance et rapports personnalisés.
           </CardDescription>
         </CardHeader>
       </Card>
@@ -145,4 +145,3 @@ export default function AnalyticsPage() {
     </div>
   );
 }
-

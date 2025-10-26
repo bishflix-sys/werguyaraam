@@ -27,9 +27,9 @@ export default function BillingPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-          <CardTitle className="font-headline">Facturation et Suivi des Paiements</CardTitle>
+          <CardTitle className="font-headline">Facturation & Paiements</CardTitle>
           <CardDescription>
-            Générez des factures, suivez les paiements et consultez les rapports financiers.
+            Gérez la facturation des actes, le suivi des assurances et les paiements.
           </CardDescription>
         </div>
          <Button>
