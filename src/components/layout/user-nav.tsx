@@ -53,19 +53,19 @@ export function UserNav({ user }: UserNavProps) {
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
              <Link href="/settings">
-              <UserIcon/>
+              <UserIcon className="mr-2 h-4 w-4" />
               <span>Profil</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/billing">
-              <CreditCard/>
+              <CreditCard className="mr-2 h-4 w-4" />
               <span>Facturation</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/settings">
-              <Settings/>
+              <Settings className="mr-2 h-4 w-4" />
               <span>Paramètres</span>
             </Link>
           </DropdownMenuItem>
@@ -73,7 +73,7 @@ export function UserNav({ user }: UserNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href="/login">
-            <LogOut />
+            <LogOut className="mr-2 h-4 w-4" />
             <span>Déconnexion</span>
           </Link>
         </DropdownMenuItem>
