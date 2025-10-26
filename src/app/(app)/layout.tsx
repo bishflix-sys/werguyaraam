@@ -34,6 +34,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     if (path.startsWith('/settings')) return 'Paramètres';
     if (path.startsWith('/dashboard')) return 'Tableau de Bord';
     if (path.startsWith('/referrals')) return 'Références & Transferts';
+    if (path.startsWith('/accidents')) return "Rapports d'Accident";
+    if (path.startsWith('/deaths')) return 'Constats de Décès';
     
     // Fallback titles for other pages from the previous structure
     switch (path) {

@@ -34,7 +34,9 @@ import {
   FileSignature,
   FlaskConical,
   BookUser,
-  HeartPulse
+  HeartPulse,
+  ShieldAlert,
+  BookX,
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
@@ -49,6 +51,8 @@ const clinicalNavItems = [
   { href: '/care-plans', icon: Stethoscope, label: 'Plans de Soins' },
   { href: '/consent', icon: BookUser, label: 'Consentements' },
   { href: '/referrals', icon: ArrowRightLeft, label: 'Références & Transferts' },
+  { href: '/accidents', icon: ShieldAlert, label: 'Rapports d\'Accident' },
+  { href: '/deaths', icon: BookX, label: 'Constats de Décès' },
   { href: '/staff', icon: UsersRound, label: 'Professionnels' },
   { href: '/messaging', icon: MessageCircle, label: 'Communication' },
 ];

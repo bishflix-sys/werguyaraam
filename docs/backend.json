@@ -197,6 +197,78 @@
         "ipAddress",
         "userAgent"
       ]
+    },
+    "AccidentReport": {
+      "title": "Accident Report",
+      "type": "object",
+      "description": "Represents a report for an accident or emergency.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the report."
+        },
+        "patientName": {
+          "type": "string",
+          "description": "Name of the patient involved."
+        },
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date and time of the incident."
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the incident."
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the incident and actions taken."
+        },
+        "urgency": {
+          "type": "string",
+          "enum": ["Haute", "Moyenne", "Faible"],
+          "description": "Urgency level of the request."
+        }
+      },
+      "required": ["id", "patientName", "dateTime", "location", "description", "urgency"]
+    },
+    "DeathCertificate": {
+      "title": "Death Certificate",
+      "type": "object",
+      "description": "Represents a death certificate.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the certificate."
+        },
+        "patientName": {
+          "type": "string",
+          "description": "Name of the deceased patient."
+        },
+        "dateOfDeath": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of death."
+        },
+        "timeOfDeath": {
+          "type": "string",
+          "format": "time",
+          "description": "Time of death."
+        },
+        "hospital": {
+          "type": "string",
+          "description": "Hospital or location where the death occurred."
+        },
+        "causeOfDeath": {
+          "type": "string",
+          "description": "Official cause of death."
+        },
+        "declaringDoctor": {
+          "type": "string",
+          "description": "Name of the doctor who declared the death."
+        }
+      },
+      "required": ["id", "patientName", "dateOfDeath", "timeOfDeath", "hospital", "causeOfDeath", "declaringDoctor"]
     }
   },
   "auth": {
@@ -298,8 +370,28 @@
             }
           ]
         }
+      },
+      {
+        "path": "/accidentReports/{reportId}",
+        "definition": {
+          "entityName": "AccidentReport",
+          "schema": {
+            "$ref": "#/backend/entities/AccidentReport"
+          },
+          "description": "Stores accident and emergency reports."
+        }
+      },
+      {
+        "path": "/deathCertificates/{certificateId}",
+        "definition": {
+          "entityName": "DeathCertificate",
+          "schema": {
+            "$ref": "#/backend/entities/DeathCertificate"
+          },
+          "description": "Stores official death certificates."
+        }
       }
     ],
-    "reasoning": "This Firestore structure prioritizes security and scalability for Weerguyaram Santé, focusing on patient data protection and regulatory compliance. It leverages path-based ownership for user-specific data (sessions, login attempts, audit logs) and a dedicated roles collection for managing user permissions. The structure avoids hierarchical authorization dependencies, enabling atomic operations and simplifying security rules.  Specifically, denormalization is applied to user roles where necessary to avoid complex `get()` operations within security rules.\n\n*   **User Data:** Stored under `/users/{userId}` for path-based ownership. Related entities like sessions, audit logs, and login attempts are also stored as subcollections of the `/users/{userId}` collection, reinforcing the User 1:N relationship. This design provides a secure way to manage and query data related to specific users.\n*   **Role-Based Access Control (RBAC):** The `/roles/{roleId}` collection stores role definitions.  The `User` document holds a `roleId` referencing the appropriate role.  No denormalization is used here; the security rules will check that the `roleId` field in the `User` document corresponds to a document in the `roles` collection.\n*   **Audit Logs:** Stored as a subcollection of `/users/{userId}/auditLogs/{auditLogId}` to track user actions. Includes `userId`, `timestamp`, `action`, `resourceType`, `resourceId`, and `details`.\n*   **Sessions:** Stored as a subcollection of `/users/{userId}/sessions/{sessionId}` to track user sessions. Includes `userId`, `sessionStart`, `sessionEnd`, `ipAddress`, and `userAgent`.\n*   **Login Attempts:** Stored as a subcollection of `/users/{userId}/loginAttempts/{loginAttemptId}` to track login attempts. Includes `username`, `timestamp`, `successful`, `ipAddress`, and `userAgent`.\n\nThis design supports the required QAPs:\n\n*   **QAP: Secure List Operations:** Path-based ownership (`/users/{userId}/...`) allows listing only resources owned by a specific user.\n*   **QAP: Robust Security Rules:** The absence of hierarchical authorization dependencies (no `get()` calls) simplifies the security rules and prevents race conditions.\n\n**GenAI Features**: Explicit consent for patient data usage is enforced via a separate `consents` subcollection under each `user` document. This segregation simplifies compliance and enhances security for AI-driven data analysis."
+    "reasoning": "This Firestore structure prioritizes security and scalability for Weerguyaram Santé, focusing on patient data protection and regulatory compliance. It leverages path-based ownership for user-specific data (sessions, login attempts, audit logs) and a dedicated roles collection for managing user permissions. The structure avoids hierarchical authorization dependencies, enabling atomic operations and simplifying security rules.  Specifically, denormalization is applied to user roles where necessary to avoid complex `get()` operations within security rules.\n\n*   **User Data:** Stored under `/users/{userId}` for path-based ownership. Related entities like sessions, audit logs, and login attempts are also stored as subcollections of the `/users/{userId}` collection, reinforcing the User 1:N relationship. This design provides a secure way to manage and query data related to specific users.\n*   **Role-Based Access Control (RBAC):** The `/roles/{roleId}` collection stores role definitions.  The `User` document holds a `roleId` referencing the appropriate role.  No denormalization is used here; the security rules will check that the `roleId` field in the `User` document corresponds to a document in the `roles` collection.\n*   **Audit Logs:** Stored as a subcollection of `/users/{userId}/auditLogs/{auditLogId}` to track user actions. Includes `userId`, `timestamp`, `action`, `resourceType`, `resourceId`, and `details`.\n*   **Sessions:** Stored as a subcollection of `/users/{userId}/sessions/{sessionId}` to track user sessions. Includes `userId`, `sessionStart`, `sessionEnd`, `ipAddress`, and `userAgent`.\n*   **Login Attempts:** Stored as a subcollection of `/users/{userId}/loginAttempts/{loginAttemptId}` to track login attempts. Includes `username`, `timestamp`, `successful`, `ipAddress`, and `userAgent`.\n*   **Accident Reports & Death Certificates:** These are stored in root collections for simplicity, but in a real-world scenario, they would likely be subcollections of a patient's record to enforce data privacy and ownership through security rules.\n\nThis design supports the required QAPs:\n\n*   **QAP: Secure List Operations:** Path-based ownership (`/users/{userId}/...`) allows listing only resources owned by a specific user.\n*   **QAP: Robust Security Rules:** The absence of hierarchical authorization dependencies (no `get()` calls) simplifies the security rules and prevents race conditions.\n\n**GenAI Features**: Explicit consent for patient data usage is enforced via a separate `consents` subcollection under each `user` document. This segregation simplifies compliance and enhances security for AI-driven data analysis."
   }
 }
