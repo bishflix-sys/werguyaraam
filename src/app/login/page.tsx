@@ -20,7 +20,7 @@ export default function LoginPage() {
           </div>
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl font-headline">Weerguyaram Santé</CardTitle>
+              <CardTitle className="text-2xl font-headline">Hôpitaux et Cliniques du Sénégal</CardTitle>
               <CardDescription>
                 Accédez à votre tableau de bord sécurisé.
               </CardDescription>
@@ -78,7 +78,7 @@ export default function LoginPage() {
         <div className="absolute bottom-10 left-10 text-primary-foreground">
           <div className="flex items-center gap-4">
             <Logo className="h-12 w-12 text-accent" />
-            <h2 className="font-headline text-4xl font-bold">Weerguyaram Santé</h2>
+            <h2 className="font-headline text-4xl font-bold">Hôpitaux et Cliniques du Sénégal</h2>
           </div>
           <p className="mt-4 text-lg">La santé pour tous, partout.</p>
         </div>

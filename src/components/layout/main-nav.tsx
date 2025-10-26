@@ -86,8 +86,8 @@ export function MainNav() {
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
           <Logo className="w-8 h-8 text-primary" />
-          <span className="font-headline text-lg font-bold group-data-[collapsible=icon]:hidden">
-            Weerguyaram
+          <span className="font-headline text-sm font-bold group-data-[collapsible=icon]:hidden">
+            Hôpitaux et Cliniques
           </span>
         </div>
       </SidebarHeader>

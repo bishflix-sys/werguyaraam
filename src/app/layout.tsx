@@ -3,7 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Weerguyaram Santé',
+  title: 'Hôpitaux et Cliniques du Sénégal',
   description: 'Gestion de santé complète et intégrée.',
 };
 
