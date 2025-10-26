@@ -1,4 +1,3 @@
-
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -34,28 +33,19 @@ import {
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
-const mainNavItems = [
+const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Tableau de Bord' },
-  { href: '/patients', icon: Users, label: 'Dossiers Patients' },
-  { href: '/appointments', icon: CalendarDays, label: 'Rendez-vous' },
   { href: '/queue', icon: Clock, label: "File d'attente" },
-];
-
-const clinicalToolsItems = [
+  { href: '/appointments', icon: CalendarDays, label: 'Rendez-vous' },
+  { href: '/patients', icon: Users, label: 'Dossiers Patients' },
   { href: '/notes', icon: FileText, label: 'Notes Cliniques' },
   { href: '/prescriptions', icon: ClipboardPenLine, label: 'E-Prescription' },
   { href: '/results', icon: Beaker, label: 'Résultats Labo' },
   { href: '/care-plans', icon: AlarmClock, label: 'Plans de Soins' },
-];
-
-const managementItems = [
   { href: '/inventory', icon: Pill, label: 'Médicaments' },
   { href: '/billing', icon: CreditCard, label: 'Facturation' },
   { href: '/staff', icon: UsersRound, label: 'Personnel' },
   { href: '/messaging', icon: MessageCircle, label: 'Messagerie' },
-];
-
-const adminItems = [
   { href: '/referrals', icon: ArrowRightLeft, label: 'Références' },
   { href: '/consent', icon: FileCheck, label: 'Consentements' },
   { href: '/triage', icon: TriangleAlert, label: 'Triage' },
@@ -65,7 +55,7 @@ const adminItems = [
 export function MainNav() {
   const pathname = usePathname();
 
-  const renderNavItems = (items: typeof mainNavItems) =>
+  const renderNavItems = (items: typeof navItems) =>
     items.map(({ href, icon: Icon, label }) => (
       <SidebarMenuItem key={href}>
         <SidebarMenuButton
@@ -74,10 +64,8 @@ export function MainNav() {
           tooltip={{ children: label, side: 'right', align: 'center' }}
         >
           <Link href={href}>
-            <div>
-              <Icon />
-              <span>{label}</span>
-            </div>
+              <Icon className="shrink-0" />
+              <span className="group-data-[collapsible=icon]:hidden">{label}</span>
           </Link>
         </SidebarMenuButton>
       </SidebarMenuItem>
@@ -87,7 +75,7 @@ export function MainNav() {
     <>
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
-          <Logo className="w-8 h-8 text-primary" />
+          <Logo className="w-8 h-8 text-primary shrink-0" />
           <span className="font-headline text-sm font-bold group-data-[collapsible=icon]:hidden">
             Hôpitaux et Cliniques
           </span>
@@ -95,13 +83,7 @@ export function MainNav() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
-          {renderNavItems(mainNavItems)}
-          <SidebarSeparator className="my-2"/>
-          {renderNavItems(clinicalToolsItems)}
-          <SidebarSeparator className="my-2"/>
-          {renderNavItems(managementItems)}
-           <SidebarSeparator className="my-2"/>
-          {renderNavItems(adminItems)}
+          {renderNavItems(navItems)}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
@@ -113,10 +95,8 @@ export function MainNav() {
               tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
             >
               <Link href="/settings">
-                <div>
-                  <Settings />
-                  <span>Paramètres</span>
-                </div>
+                <Settings className="shrink-0" />
+                <span className="group-data-[collapsible=icon]:hidden">Paramètres</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -126,10 +106,8 @@ export function MainNav() {
                 tooltip={{ children: 'Déconnexion', side: 'right', align: 'center' }}
               >
               <Link href="/login">
-                <div>
-                  <LogOut />
-                  <span>Déconnexion</span>
-                </div>
+                <LogOut className="shrink-0" />
+                <span className="group-data-[collapsible=icon]:hidden">Déconnexion</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
