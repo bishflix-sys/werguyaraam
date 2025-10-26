@@ -30,6 +30,7 @@ import {
   TriangleAlert,
   ArrowRightLeft,
   FileCheck,
+  Building,
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
@@ -58,6 +59,7 @@ const adminItems = [
   { href: '/referrals', icon: ArrowRightLeft, label: 'Références' },
   { href: '/consent', icon: FileCheck, label: 'Consentements' },
   { href: '/triage', icon: TriangleAlert, label: 'Triage' },
+  { href: '/hospitals', icon: Building, label: 'Hôpitaux' },
 ];
 
 export function MainNav() {

@@ -41,6 +41,22 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         return 'Communication Sécurisée';
       case 'settings':
         return 'Paramètres';
+       case 'notes':
+        return 'Notes Cliniques';
+      case 'prescriptions':
+        return 'E-Prescription';
+      case 'results':
+        return 'Résultats Labo';
+      case 'care-plans':
+        return 'Plans de Soins';
+      case 'referrals':
+        return 'Références';
+      case 'consent':
+        return 'Consentements';
+      case 'triage':
+        return 'Triage';
+      case 'hospitals':
+        return 'Hôpitaux et Cliniques';
       default:
         return 'Hôpitaux et Cliniques du Sénégal';
     }
