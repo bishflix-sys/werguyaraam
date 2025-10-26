@@ -25,7 +25,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
-import { CalendarClock } from "lucide-react";
+import { CalendarClock, CreditCard } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 type Hospital = {
   name: string;
@@ -145,38 +146,68 @@ export default function HospitalsPage() {
     </Card>
 
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="font-headline">Prendre un rendez-vous</DialogTitle>
           <DialogDescription>
             Planifiez votre rendez-vous à <span className="font-semibold">{selectedHospital?.name}</span>.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Nom complet
-            </Label>
-            <Input id="name" placeholder="Ex: Prénom Nom" className="col-span-3" />
+        <div className="grid gap-6 py-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Nom complet</Label>
+                <Input id="name" placeholder="Ex: Prénom Nom" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="date">Date</Label>
+                <Input id="date" type="date" />
+              </div>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="date" className="text-right">
-              Date
-            </Label>
-            <Input id="date" type="date" className="col-span-3" />
+          <div className="space-y-2">
+            <Label htmlFor="reason">Motif</Label>
+            <Textarea id="reason" placeholder="Décrivez la raison de votre visite..." />
           </div>
-           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="reason" className="text-right">
-              Motif
-            </Label>
-             <Textarea id="reason" placeholder="Décrivez la raison de votre visite..." className="col-span-3" />
+
+          <div className="border-t pt-4 mt-2">
+              <h4 className="font-semibold text-lg mb-2">Frais de réservation</h4>
+              <div className="flex justify-between items-center bg-muted/50 p-3 rounded-md">
+                  <p>Montant à payer</p>
+                  <p className="font-bold text-lg">1000 FCFA</p>
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <Label>Choisir une méthode de paiement</Label>
+                <RadioGroup defaultValue="wave">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="wave" id="wave" />
+                    <Label htmlFor="wave">Wave</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="orange-money" id="orange-money" />
+                    <Label htmlFor="orange-money">Orange Money</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="free-money" id="free-money" />
+                    <Label htmlFor="free-money">Free Money</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+               <div className="mt-4 space-y-2">
+                  <Label htmlFor="phone">Numéro de téléphone</Label>
+                  <Input id="phone" placeholder="7X XXX XX XX" type="tel" />
+              </div>
           </div>
+
         </div>
         <DialogFooter>
             <DialogClose asChild>
                 <Button type="button" variant="secondary">Annuler</Button>
             </DialogClose>
-            <Button type="submit">Confirmer le RDV</Button>
+            <Button type="submit">
+                <CreditCard className="mr-2 h-4 w-4"/>
+                Payer et Confirmer
+            </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
