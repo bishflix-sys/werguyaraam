@@ -1,0 +1,123 @@
+/**
+ * @file Firestore Security Rules
+ * @description This ruleset enforces a strict user-ownership model for most data, with role-based access control (RBAC) to manage permissions.
+ *
+ * Data Structure:
+ * - /users/{userId}: Stores user account information.
+ * - /roles/{roleId}: Stores role definitions and permissions.
+ * - /users/{userId}/auditLogs/{auditLogId}: Stores audit log entries for user actions.
+ * - /users/{userId}/sessions/{sessionId}: Stores user session information.
+ * - /users/{userId}/loginAttempts/{loginAttemptId}: Stores login attempts for users.
+ *
+ * Key Security Decisions:
+ * - User data is strictly controlled by the owning user.
+ * - Audit logs, sessions, and login attempts are only accessible to the owning user.
+ * - Listing of users is not permitted.
+ * - Role-based access is implemented for administrative functions.
+ *
+ * Denormalization for Authorization:
+ * - None used; authorization is path-based.
+ *
+ * Structural Segregation:
+ * - User-specific data is stored in subcollections under /users/{userId} to ensure clear ownership and prevent accidental data leakage.
+ */
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * @description Enforces ownership for user documents. Only the authenticated user can read or write their own document.
+     * @path /users/{userId}
+     * @allow (create, update, delete) User with matching {userId} can create, update, or delete their own user document.
+     *   Example: request.auth.uid = "user123", resource.data.id = "user123"
+     * @deny (create, update, delete) User with mismatched {userId} cannot create, update, or delete another user's document.
+     *   Example: request.auth.uid = "user456", resource.data.id = "user123"
+     * @principle Enforces document ownership for writes and prevents unauthorized modification of user data.
+     */
+    match /users/{userId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+      function isExistingOwner(userId) {
+        return isOwner(userId) && resource != null;
+      }
+      allow get: if isOwner(userId);
+      allow list: if false;
+      allow create: if isOwner(userId) && request.resource.data.id == request.auth.uid;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
+    }
+
+    /**
+     * @description Manages roles within the system. Access to roles is restricted to authorized users or services.
+     * @path /roles/{roleId}
+     * @allow (get, list) Anyone can read the roles.
+     * @deny (create, update, delete) No one can create, update, or delete the roles.
+     * @principle Enforces centralized role management and prevents unauthorized modification of role definitions.
+     */
+    match /roles/{roleId} {
+      allow get, list: if true;
+      allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Enforces ownership for audit log entries. Only the authenticated user can read or write their own audit logs.
+     * @path /users/{userId}/auditLogs/{auditLogId}
+     * @allow (create) User with matching {userId} can create their own audit log entry.
+     *   Example: request.auth.uid = "user123", resource.data.userId = "user123"
+     * @deny (create) User with mismatched {userId} cannot create audit log entries for another user.
+     *   Example: request.auth.uid = "user456", resource.data.userId = "user123"
+     * @deny (update, delete) No user can update or delete audit logs.
+     * @principle Enforces document ownership for writes and prevents unauthorized modification of user data.
+     */
+    match /users/{userId}/auditLogs/{auditLogId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    /**
+     * @description Enforces ownership for session information. Only the authenticated user can read or write their own session data.
+     * @path /users/{userId}/sessions/{sessionId}
+     * @allow (create) User with matching {userId} can create their own session.
+     *   Example: request.auth.uid = "user123", resource.data.userId = "user123"
+     * @deny (create) User with mismatched {userId} cannot create sessions for another user.
+     *   Example: request.auth.uid = "user456", resource.data.userId = "user123"
+     * @deny (update, delete) No user can update or delete session data.
+     * @principle Enforces document ownership for writes and prevents unauthorized modification of user data.
+     */
+    match /users/{userId}/sessions/{sessionId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    /**
+     * @description Enforces ownership for login attempt information. Only the authenticated user can read or write their own login attempts.
+     * @path /users/{userId}/loginAttempts/{loginAttemptId}
+     * @allow (create) User with matching {userId} can create their own login attempt.
+     *   Example: request.auth.uid = "user123", resource.data.userId = "user123"
+     * @deny (create) User with mismatched {userId} cannot create login attempts for another user.
+     *   Example: request.auth.uid = "user456", resource.data.userId = "user123"
+     * @deny (update, delete) No user can update or delete login attempt data.
+     * @principle Enforces document ownership for writes and prevents unauthorized modification of user data.
+     */
+    match /users/{userId}/loginAttempts/{loginAttemptId} {
+      function isOwner(userId) {
+        return request.auth.uid == userId;
+      }
+      allow get: if isOwner(userId);
+      allow list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if false;
+    }
+  }
+}

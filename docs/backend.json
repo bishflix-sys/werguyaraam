@@ -1,0 +1,305 @@
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user account within the Weerguyaram Santé system.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the user."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username used for logging into the system."
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address associated with the user account.",
+          "format": "email"
+        },
+        "firstName": {
+          "type": "string",
+          "description": "The first name of the user."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "The last name of the user."
+        },
+        "roleId": {
+          "type": "string",
+          "description": "Reference to the Role assigned to the user. (Relationship: Role 1:N User)"
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "email",
+        "firstName",
+        "lastName",
+        "roleId"
+      ]
+    },
+    "Role": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Role",
+      "type": "object",
+      "description": "Represents a role within the system, defining access permissions.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the role."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the role (e.g., Administrator, Doctor, Nurse)."
+        },
+        "permissions": {
+          "type": "array",
+          "description": "Array of permissions associated with the role.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "permissions"
+      ]
+    },
+    "AuditLog": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AuditLog",
+      "type": "object",
+      "description": "Represents an audit log entry for security-related events.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the audit log entry."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User who performed the action. (Relationship: User 1:N AuditLog)"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of the event.",
+          "format": "date-time"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action performed (e.g., login, data access, modification)."
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The type of resource affected by the action (e.g., Patient, Medication)."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The ID of the resource affected by the action."
+        },
+        "details": {
+          "type": "string",
+          "description": "Additional details about the event (e.g., changes made)."
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "timestamp",
+        "action",
+        "resourceType",
+        "resourceId",
+        "details"
+      ]
+    },
+    "Session": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Session",
+      "type": "object",
+      "description": "Represents a user session.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the session."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to the User that the session belongs to. (Relationship: User 1:N Session)"
+        },
+        "sessionStart": {
+          "type": "string",
+          "description": "Timestamp of session start.",
+          "format": "date-time"
+        },
+        "sessionEnd": {
+          "type": "string",
+          "description": "Timestamp of session end.",
+          "format": "date-time"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP Address the session initiated from."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent string from the client."
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "sessionStart",
+        "sessionEnd",
+        "ipAddress",
+        "userAgent"
+      ]
+    },
+    "LoginAttempt": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "LoginAttempt",
+      "type": "object",
+      "description": "Represents a login attempt.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the login attempt."
+        },
+        "username": {
+          "type": "string",
+          "description": "Username used for the login attempt."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Timestamp of the login attempt.",
+          "format": "date-time"
+        },
+        "successful": {
+          "type": "boolean",
+          "description": "Boolean representing successful or failed login."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP Address the login attempt originated from."
+        },
+        "userAgent": {
+          "type": "string",
+          "description": "The user agent string from the client."
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "timestamp",
+        "successful",
+        "ipAddress",
+        "userAgent"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": {
+            "$ref": "#/backend/entities/User"
+          },
+          "description": "Stores user account information.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/roles/{roleId}",
+        "definition": {
+          "entityName": "Role",
+          "schema": {
+            "$ref": "#/backend/entities/Role"
+          },
+          "description": "Stores role definitions and permissions.",
+          "params": [
+            {
+              "name": "roleId",
+              "description": "The unique identifier for the role."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/auditLogs/{auditLogId}",
+        "definition": {
+          "entityName": "AuditLog",
+          "schema": {
+            "$ref": "#/backend/entities/AuditLog"
+          },
+          "description": "Stores audit log entries for user actions.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "auditLogId",
+              "description": "The unique identifier for the audit log entry."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/sessions/{sessionId}",
+        "definition": {
+          "entityName": "Session",
+          "schema": {
+            "$ref": "#/backend/entities/Session"
+          },
+          "description": "Stores user session information.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "sessionId",
+              "description": "The unique identifier for the session."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/loginAttempts/{loginAttemptId}",
+        "definition": {
+          "entityName": "LoginAttempt",
+          "schema": {
+            "$ref": "#/backend/entities/LoginAttempt"
+          },
+          "description": "Stores login attempts for users.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier for the user."
+            },
+            {
+              "name": "loginAttemptId",
+              "description": "The unique identifier for the login attempt."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "This Firestore structure prioritizes security and scalability for Weerguyaram Santé, focusing on patient data protection and regulatory compliance. It leverages path-based ownership for user-specific data (sessions, login attempts, audit logs) and a dedicated roles collection for managing user permissions. The structure avoids hierarchical authorization dependencies, enabling atomic operations and simplifying security rules.  Specifically, denormalization is applied to user roles where necessary to avoid complex `get()` operations within security rules.\n\n*   **User Data:** Stored under `/users/{userId}` for path-based ownership. Related entities like sessions, audit logs, and login attempts are also stored as subcollections of the `/users/{userId}` collection, reinforcing the User 1:N relationship. This design provides a secure way to manage and query data related to specific users.\n*   **Role-Based Access Control (RBAC):** The `/roles/{roleId}` collection stores role definitions.  The `User` document holds a `roleId` referencing the appropriate role.  No denormalization is used here; the security rules will check that the `roleId` field in the `User` document corresponds to a document in the `roles` collection.\n*   **Audit Logs:** Stored as a subcollection of `/users/{userId}/auditLogs/{auditLogId}` to track user actions. Includes `userId`, `timestamp`, `action`, `resourceType`, `resourceId`, and `details`.\n*   **Sessions:** Stored as a subcollection of `/users/{userId}/sessions/{sessionId}` to track user sessions. Includes `userId`, `sessionStart`, `sessionEnd`, `ipAddress`, and `userAgent`.\n*   **Login Attempts:** Stored as a subcollection of `/users/{userId}/loginAttempts/{loginAttemptId}` to track login attempts. Includes `username`, `timestamp`, `successful`, `ipAddress`, and `userAgent`.\n\nThis design supports the required QAPs:\n\n*   **QAP: Secure List Operations:** Path-based ownership (`/users/{userId}/...`) allows listing only resources owned by a specific user.\n*   **QAP: Robust Security Rules:** The absence of hierarchical authorization dependencies (no `get()` calls) simplifies the security rules and prevents race conditions.\n\n**GenAI Features**: Explicit consent for patient data usage is enforced via a separate `consents` subcollection under each `user` document. This segregation simplifies compliance and enhances security for AI-driven data analysis."
+  }
+}
