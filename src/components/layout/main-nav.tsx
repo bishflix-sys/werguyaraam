@@ -27,6 +27,7 @@ import {
   AreaChart,
   KeyRound,
   Globe,
+  ArrowRightLeft,
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
@@ -34,6 +35,7 @@ const clinicalNavItems = [
   { href: '/patients', icon: FolderKanban, label: 'Dossiers Patients (DME)' },
   { href: '/appointments', icon: CalendarDays, label: 'Rendez-vous' },
   { href: '/staff', icon: UsersRound, label: 'Professionnels' },
+  { href: '/referrals', icon: ArrowRightLeft, label: 'Références & Transferts' },
 ];
 
 const financialItems = [

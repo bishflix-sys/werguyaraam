@@ -59,7 +59,7 @@ export default function ReferralsPage() {
                    <Badge variant={
                     referral.status === 'Acceptée' || referral.status === 'Terminée' ? 'default' : referral.status === 'En attente' ? 'secondary' : 'outline'
                   } className={
-                     referral.status === 'Acceptée' ? 'bg-blue-500' : referral.status === 'Terminée' ? 'bg-green-500' : referral.status === 'En attente' ? 'bg-yellow-500' : ''
+                     referral.status === 'Acceptée' ? 'bg-blue-500' : referral.status === 'Terminée' ? 'bg-green-500' : referral.status === 'En attente' ? 'bg-yellow-500/80' : ''
                   }>
                     {referral.status}
                   </Badge>

@@ -32,6 +32,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     if (path.startsWith('/hospitals')) return 'Portail Patient';
     if (path.startsWith('/settings')) return 'Paramètres';
     if (path.startsWith('/dashboard')) return 'Tableau de Bord';
+    if (path.startsWith('/referrals')) return 'Références & Transferts';
     
     // Fallback titles for other pages from the previous structure
     switch (path) {
@@ -47,8 +48,6 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         return 'Résultats Labo';
       case '/care-plans':
         return 'Plans de Soins';
-      case '/referrals':
-        return 'Références';
       case '/consent':
         return 'Consentements';
       case '/triage':
