@@ -4,15 +4,15 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      viewBox="0 0 900 600"
       {...props}
     >
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.77 5.82 22 7 14.14 2 9.27l6.91-1.01L12 2z" />
+      <rect width="300" height="600" fill="#00853f"/>
+      <rect x="300" width="300" height="600" fill="#fdef42"/>
+      <rect x="600" width="300" height="600" fill="#e31b23"/>
+      <g transform="translate(450,300)">
+        <path d="M0-90L27.8-18.7L94.7 11.2L42.9 66.8L58.4 108L0 90L-58.4 108L-42.9 66.8L-94.7 11.2L-27.8-18.7Z" fill="#00853f"/>
+      </g>
     </svg>
   );
 }
