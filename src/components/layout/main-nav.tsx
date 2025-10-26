@@ -28,6 +28,7 @@ import {
   KeyRound,
   Globe,
   ArrowRightLeft,
+  Ambulance,
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
@@ -46,6 +47,7 @@ const financialItems = [
 const logisticsItems = [
   { href: '/inventory', icon: Pill, label: 'Pharmacie & Stocks' },
   { href: '/equipment', icon: Wrench, label: 'Maintenance Équipements' },
+  { href: '/ambulances', icon: Ambulance, label: 'Ambulances' },
 ];
 
 const platformItems = [

@@ -29,6 +29,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
     if (path.startsWith('/analytics')) return 'Rapports & Statistiques';
     if (path.startsWith('/inventory')) return 'Gestion des Stocks & Pharmacie';
     if (path.startsWith('/equipment')) return 'Maintenance des Équipements';
+    if (path.startsWith('/ambulances')) return 'Suivi des Ambulances';
     if (path.startsWith('/hospitals')) return 'Portail Patient';
     if (path.startsWith('/settings')) return 'Paramètres';
     if (path.startsWith('/dashboard')) return 'Tableau de Bord';
