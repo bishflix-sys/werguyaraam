@@ -26,7 +26,7 @@ import {
   Beaker,
   ClipboardPenLine,
   FileText,
-  Siren,
+  AlarmClock,
   TriangleAlert,
   ArrowRightLeft,
   FileCheck,
@@ -44,7 +44,7 @@ const clinicalToolsItems = [
   { href: '/notes', icon: FileText, label: 'Notes Cliniques' },
   { href: '/prescriptions', icon: ClipboardPenLine, label: 'E-Prescription' },
   { href: '/results', icon: Beaker, label: 'Résultats Labo' },
-  { href: '/care-plans', icon: Siren, label: 'Plans de Soins' },
+  { href: '/care-plans', icon: AlarmClock, label: 'Plans de Soins' },
 ];
 
 const managementItems = [
@@ -66,17 +66,18 @@ export function MainNav() {
   const renderNavItems = (items: typeof mainNavItems) =>
     items.map(({ href, icon: Icon, label }) => (
       <SidebarMenuItem key={href}>
-        <Link href={href} passHref>
-          <SidebarMenuButton
-            isActive={pathname === href}
-            tooltip={{ children: label, side: 'right', align: 'center' }}
-          >
+        <SidebarMenuButton
+          asChild
+          isActive={pathname === href}
+          tooltip={{ children: label, side: 'right', align: 'center' }}
+        >
+          <Link href={href}>
             <div>
               <Icon />
               <span>{label}</span>
             </div>
-          </SidebarMenuButton>
-        </Link>
+          </Link>
+        </SidebarMenuButton>
       </SidebarMenuItem>
     ));
 
@@ -104,29 +105,31 @@ export function MainNav() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <Link href="/settings" passHref>
-              <SidebarMenuButton
-                isActive={pathname === '/settings'}
-                tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
-              >
+            <SidebarMenuButton
+              asChild
+              isActive={pathname === '/settings'}
+              tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
+            >
+              <Link href="/settings">
                 <div>
                   <Settings />
                   <span>Paramètres</span>
                 </div>
-              </SidebarMenuButton>
-            </Link>
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-             <Link href="/login" passHref>
-              <SidebarMenuButton
+             <SidebarMenuButton
+                asChild
                 tooltip={{ children: 'Déconnexion', side: 'right', align: 'center' }}
               >
+              <Link href="/login">
                 <div>
                   <LogOut />
                   <span>Déconnexion</span>
                 </div>
-              </SidebarMenuButton>
-            </Link>
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
