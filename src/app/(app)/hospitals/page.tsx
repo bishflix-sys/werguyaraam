@@ -34,7 +34,7 @@ export default function HospitalsPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="font-headline">Hôpitaux et Cliniques du Sénégal</CardTitle>
+        <CardTitle className="font-headline">Annuaire Weergu Yaram</CardTitle>
         <CardDescription>
           Annuaire des établissements de santé au Sénégal.
         </CardDescription>
@@ -61,7 +61,7 @@ export default function HospitalsPage() {
                     <Badge variant={hospital.type === 'Hôpital' ? 'secondary' : 'outline'}>{hospital.type}</Badge>
                 </TableCell>
                 <TableCell>
-                    <Badge variant={hospital.category === 'Public' ? 'default' : 'secondary'} className={hospital.category === 'Public' ? 'bg-blue-500' : 'bg-green-500'}>
+                    <Badge variant={hospital.category === 'Public' ? 'default' : 'secondary'} className={hospital.category === 'Public' ? 'bg-primary text-primary-foreground' : 'bg-green-500'}>
                         {hospital.category}
                     </Badge>
                 </TableCell>

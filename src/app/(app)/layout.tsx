@@ -15,7 +15,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   // In a real app, you would get this from a session or user context
   const user = {
     name: 'Dr. Awa Fall',
-    email: 'awa.fall@cliniquesenegal.sn',
+    email: 'awa.fall@weerguyaram.sn',
     avatar: 'https://picsum.photos/seed/avatar1/100/100',
     initials: 'AF',
   };
@@ -58,7 +58,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       case 'hospitals':
         return 'Hôpitaux et Cliniques';
       default:
-        return 'Hôpitaux et Cliniques du Sénégal';
+        return 'Weergu Yaram';
     }
   };
 

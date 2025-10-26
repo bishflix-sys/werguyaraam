@@ -52,7 +52,7 @@ export function UserNav({ user }: UserNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-             <Link href="#">
+             <Link href="/settings">
               <UserIcon/>
               <span>Profil</span>
             </Link>
