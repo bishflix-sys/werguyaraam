@@ -1,3 +1,4 @@
+
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -30,6 +31,7 @@ import {
   ArrowRightLeft,
   FileCheck,
   Building,
+  TrendingUp,
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
@@ -56,6 +58,7 @@ const managementItems = [
 ];
 
 const adminItems = [
+  { href: '/analytics', icon: TrendingUp, label: 'Analyses' },
   { href: '/referrals', icon: ArrowRightLeft, label: 'Références' },
   { href: '/consent', icon: FileCheck, label: 'Consentements' },
   { href: '/hospitals', icon: Building, label: 'Annuaire' },
@@ -87,7 +90,7 @@ export function MainNav() {
           <Logo className="w-10 h-10 text-primary shrink-0" />
           <div className="flex flex-col group-data-[collapsible=icon]:hidden">
              <span className="font-headline text-lg font-bold">
-                Weergu Yaram
+                weerguyaram
              </span>
              <span className="text-xs text-muted-foreground">Clinique ABC</span>
           </div>
@@ -95,12 +98,16 @@ export function MainNav() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
+          <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Principal</span>
           {renderNavItems(mainNavItems)}
           <SidebarSeparator className="my-2"/>
+           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Outils Cliniques</span>
           {renderNavItems(clinicalToolsItems)}
           <SidebarSeparator className="my-2"/>
+           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Gestion</span>
           {renderNavItems(managementItems)}
            <SidebarSeparator className="my-2"/>
+           <span className="text-xs text-muted-foreground px-4 group-data-[collapsible=icon]:hidden">Administration</span>
           {renderNavItems(adminItems)}
         </SidebarMenu>
       </SidebarContent>

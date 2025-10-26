@@ -1,3 +1,4 @@
+
 'use client';
 
 import {
@@ -57,8 +58,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         return 'Triage';
       case 'hospitals':
         return 'Hôpitaux et Cliniques';
+      case 'analytics':
+        return 'Analyses et Rapports';
       default:
-        return 'Weergu Yaram';
+        return 'weerguyaram';
     }
   };
 
