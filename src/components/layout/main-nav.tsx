@@ -1,4 +1,3 @@
-
 'use client';
 
 import { usePathname } from 'next/navigation';
@@ -84,7 +83,7 @@ export function MainNav() {
              <span className="font-headline text-lg font-bold">
                 weerguyaram
              </span>
-             <span className="text-xs text-muted-foreground">Clinique ABC</span>
+             <span className="text-xs text-muted-foreground">Oeil de la santé</span>
           </div>
         </div>
       </SidebarHeader>
