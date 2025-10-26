@@ -51,18 +51,26 @@ Ce projet est conçu pour fonctionner dans l'environnement de Firebase Studio.
     ```
     L'application sera accessible à l'adresse [http://localhost:9002](http://localhost:9002).
 
-## Структура du projet
+## Structure du projet
 
 ```
 /src
-|-- /app                 # Routes de l'application (Next.js App Router)
-|   |-- /(app)           # Pages protégées de l'ERP
-|   |-- /login           # Page de connexion
-|   |-- layout.tsx
-|   `-- page.tsx
-|-- /components          # Composants React réutilisables (UI, Layout)
-|-- /lib                 # Fonctions utilitaires et configuration
-|-- /ai                  # Logique et flows pour les fonctionnalités IA avec Genkit
+|-- /app                   # Routes de l'application (Next.js App Router)
+|   |-- /(app)             # Pages protégées de l'ERP (tableau de bord, patients, etc.)
+|   |   |-- /dashboard
+|   |   |-- /patients
+|   |   |-- /appointments
+|   |   |-- ... (et toutes les autres pages fonctionnelles)
+|   |   `-- layout.tsx     # Layout principal de l'application
+|   |-- /login             # Page de connexion
+|   |-- layout.tsx         # Layout racine
+|   `-- page.tsx           # Page d'accueil (redirection)
+|-- /components            # Composants React réutilisables
+|   |-- /layout            # Composants de mise en page (Header, Nav, etc.)
+|   `-- /ui                # Composants d'interface (Button, Card, etc. de ShadCN)
+|-- /firebase              # Configuration et hooks pour Firebase
+|-- /lib                   # Fonctions utilitaires et configuration
+|-- /ai                    # Logique et flows pour les fonctionnalités IA avec Genkit
 `-- ...
 ```
 
