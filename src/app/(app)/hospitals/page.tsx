@@ -12,9 +12,29 @@ import {
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { CalendarClock } from "lucide-react";
 
-const allHospitals = [
+type Hospital = {
+  name: string;
+  city: string;
+  type: string;
+  category: string;
+};
+
+const allHospitals: Hospital[] = [
     { name: "Centre Hospitalier National Universitaire (CHNU) Fann", city: "Dakar", type: "Hôpital", category: "Public" },
     { name: "Hôpital Principal de Dakar", city: "Dakar", type: "Hôpital", category: "Public" },
     { name: "Hôpital Aristide Le Dantec", city: "Dakar", type: "Hôpital", category: "Public" },
@@ -49,14 +69,22 @@ const allHospitals = [
 
 export default function HospitalsPage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedHospital, setSelectedHospital] = useState<Hospital | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const filteredHospitals = allHospitals.filter((hospital) => 
     hospital.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     hospital.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
     hospital.category.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
+  const handleRdvClick = (hospital: Hospital) => {
+    setSelectedHospital(hospital);
+    setIsDialogOpen(true);
+  }
 
   return (
+    <>
     <Card>
       <CardHeader>
         <CardTitle className="font-headline">Annuaire Weergu Yaram</CardTitle>
@@ -80,6 +108,7 @@ export default function HospitalsPage() {
               <TableHead>Ville</TableHead>
               <TableHead>Type</TableHead>
               <TableHead>Catégorie</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -102,11 +131,55 @@ export default function HospitalsPage() {
                         {hospital.category}
                     </Badge>
                 </TableCell>
+                <TableCell className="text-right">
+                  <Button variant="outline" size="sm" onClick={() => handleRdvClick(hospital)}>
+                    <CalendarClock className="mr-2 h-4 w-4" />
+                    Prendre RDV
+                  </Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </CardContent>
     </Card>
+
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogContent className="sm:max-w-[425px]">
+        <DialogHeader>
+          <DialogTitle className="font-headline">Prendre un rendez-vous</DialogTitle>
+          <DialogDescription>
+            Planifiez votre rendez-vous à <span className="font-semibold">{selectedHospital?.name}</span>.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="name" className="text-right">
+              Nom complet
+            </Label>
+            <Input id="name" placeholder="Ex: Prénom Nom" className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="date" className="text-right">
+              Date
+            </Label>
+            <Input id="date" type="date" className="col-span-3" />
+          </div>
+           <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="reason" className="text-right">
+              Motif
+            </Label>
+             <Textarea id="reason" placeholder="Décrivez la raison de votre visite..." className="col-span-3" />
+          </div>
+        </div>
+        <DialogFooter>
+            <DialogClose asChild>
+                <Button type="button" variant="secondary">Annuler</Button>
+            </DialogClose>
+            <Button type="submit">Confirmer le RDV</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+    </>
   );
 }

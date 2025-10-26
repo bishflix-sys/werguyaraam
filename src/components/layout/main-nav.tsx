@@ -33,29 +33,38 @@ import {
 } from 'lucide-react';
 import { Logo } from '@/components/icons/logo';
 
-const navItems = [
+const mainNavItems = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Tableau de Bord' },
   { href: '/queue', icon: Clock, label: "File d'attente" },
   { href: '/appointments', icon: CalendarDays, label: 'Rendez-vous' },
   { href: '/patients', icon: Users, label: 'Dossiers Patients' },
+];
+
+const clinicalToolsItems = [
   { href: '/notes', icon: FileText, label: 'Notes Cliniques' },
   { href: '/prescriptions', icon: ClipboardPenLine, label: 'E-Prescription' },
   { href: '/results', icon: Beaker, label: 'Résultats Labo' },
   { href: '/care-plans', icon: HeartPulse, label: 'Plans de Soins' },
+  { href: '/triage', icon: TriangleAlert, label: 'Triage' },
+];
+
+const managementItems = [
   { href: '/inventory', icon: Pill, label: 'Médicaments' },
   { href: '/billing', icon: CreditCard, label: 'Facturation' },
   { href: '/staff', icon: UsersRound, label: 'Personnel' },
   { href: '/messaging', icon: MessageCircle, label: 'Messagerie' },
+];
+
+const adminItems = [
   { href: '/referrals', icon: ArrowRightLeft, label: 'Références' },
   { href: '/consent', icon: FileCheck, label: 'Consentements' },
-  { href: '/triage', icon: TriangleAlert, label: 'Triage' },
-  { href: '/hospitals', icon: Building, label: 'Hôpitaux' },
+  { href: '/hospitals', icon: Building, label: 'Annuaire' },
 ];
 
 export function MainNav() {
   const pathname = usePathname();
 
-  const renderNavItems = (items: typeof navItems) =>
+  const renderNavItems = (items: typeof mainNavItems) =>
     items.map(({ href, icon: Icon, label }) => (
       <SidebarMenuItem key={href}>
         <SidebarMenuButton
@@ -64,7 +73,7 @@ export function MainNav() {
           tooltip={{ children: label, side: 'right', align: 'center' }}
         >
           <Link href={href}>
-              <Icon className="shrink-0" />
+              <Icon className="shrink-0 group-data-[collapsible=icon]:h-6 group-data-[collapsible=icon]:w-6" />
               <span className="group-data-[collapsible=icon]:hidden">{label}</span>
           </Link>
         </SidebarMenuButton>
@@ -74,16 +83,25 @@ export function MainNav() {
   return (
     <>
       <SidebarHeader>
-        <div className="flex items-center gap-2 p-2">
-          <Logo className="w-8 h-8 text-primary shrink-0" />
-          <span className="font-headline text-lg font-bold group-data-[collapsible=icon]:hidden">
-            Weergu Yaram
-          </span>
+        <div className="flex items-center gap-3 p-2">
+          <Logo className="w-10 h-10 text-primary shrink-0" />
+          <div className="flex flex-col group-data-[collapsible=icon]:hidden">
+             <span className="font-headline text-lg font-bold">
+                Weergu Yaram
+             </span>
+             <span className="text-xs text-muted-foreground">Clinique ABC</span>
+          </div>
         </div>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
-          {renderNavItems(navItems)}
+          {renderNavItems(mainNavItems)}
+          <SidebarSeparator className="my-2"/>
+          {renderNavItems(clinicalToolsItems)}
+          <SidebarSeparator className="my-2"/>
+          {renderNavItems(managementItems)}
+           <SidebarSeparator className="my-2"/>
+          {renderNavItems(adminItems)}
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
@@ -95,7 +113,7 @@ export function MainNav() {
               tooltip={{ children: 'Paramètres', side: 'right', align: 'center' }}
             >
               <Link href="/settings">
-                <Settings className="shrink-0" />
+                <Settings className="shrink-0 group-data-[collapsible=icon]:h-6 group-data-[collapsible=icon]:w-6" />
                 <span className="group-data-[collapsible=icon]:hidden">Paramètres</span>
               </Link>
             </SidebarMenuButton>
@@ -106,7 +124,7 @@ export function MainNav() {
                 tooltip={{ children: 'Déconnexion', side: 'right', align: 'center' }}
               >
               <Link href="/login">
-                <LogOut className="shrink-0" />
+                <LogOut className="shrink-0 group-data-[collapsible=icon]:h-6 group-data-[collapsible=icon]:w-6" />
                 <span className="group-data-[collapsible=icon]:hidden">Déconnexion</span>
               </Link>
             </SidebarMenuButton>
