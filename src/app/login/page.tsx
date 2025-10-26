@@ -67,12 +67,12 @@ export default function LoginPage() {
       </div>
       <div className="hidden bg-muted lg:block relative">
         <Image
-          src="https://picsum.photos/seed/health/1920/1080"
-          alt="Image de fond médicale"
+          src="https://picsum.photos/seed/senegal-health/1920/1080"
+          alt="Image de fond sur la santé au Sénégal"
           width="1920"
           height="1080"
           className="h-full w-full object-cover dark:brightness-[0.3]"
-          data-ai-hint="medical technology"
+          data-ai-hint="senegal health"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-primary/20" />
         <div className="absolute bottom-10 left-10 text-primary-foreground">
